@@ -1,12 +1,17 @@
 import { expect, test, describe } from "bun:test";
 import { Lexer } from "./lexer";
 import { TokenType } from "../token/token";
+interface ExpectLexerType {
+	expectType: TokenType;
+	expectedLiteral: string;
+}
+type TestsType = ExpectLexerType[];
 
 describe("Lexer", () => {
 	test("should parser the basic input correctly", () => {
 		const input = "=+(){}";
 		const lexer = new Lexer(input);
-		const tests = [
+		const tests: TestsType = [
 			{
 				expectType: TokenType.ASSIGN,
 				expectedLiteral: "=",
@@ -52,7 +57,7 @@ describe("Lexer", () => {
         let result = add(five,ten);
         `;
 		const lexer = new Lexer(input);
-		const tests = [
+		const tests: TestsType = [
 			{
 				expectType: TokenType.LET,
 				expectedLiteral: "let",
@@ -204,7 +209,6 @@ describe("Lexer", () => {
 		];
 		for (const test of tests) {
 			const token = lexer.nextToken();
-			console.log(token);
 			expect(token.Type).toEqual(test.expectType);
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
@@ -215,7 +219,7 @@ describe("Lexer", () => {
 		5 < 10 > 5
 		`;
 		const lexer = new Lexer(input);
-		const tests = [
+		const tests: TestsType = [
 			{
 				expectType: TokenType.BANG,
 				expectedLiteral: "!",
