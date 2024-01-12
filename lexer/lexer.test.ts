@@ -209,7 +209,7 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
-	test("should parser !-/*<>", () => {
+	test("should parser more operators like !-/*<>", () => {
 		const input = `
 		!-/*5
 		5 < 10 > 5
