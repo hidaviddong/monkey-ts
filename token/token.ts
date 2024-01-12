@@ -31,5 +31,5 @@ export const Keywords = new Map<string, TokenType>([
 
 export interface Token {
 	Type: TokenType;
-	Literal: string | number;
+	Literal: string;
 }
