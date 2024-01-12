@@ -15,6 +15,8 @@ export enum TokenType {
 	SLASH = "/",
 	LT = "<",
 	RT = ">",
+	EQ = "==",
+	NOT_EQ = "!=",
 
 	// 分隔符
 	COMMA = ",",

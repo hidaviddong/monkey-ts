@@ -352,4 +352,54 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
+	test("should support == and !=", () => {
+		const input = `
+		1==1;
+		1!=2;
+	`;
+		const lexer = new Lexer(input);
+		const tests: TestsType = [
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "1",
+			},
+			{
+				expectType: TokenType.EQ,
+				expectedLiteral: "==",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "1",
+			},
+			{
+				expectType: TokenType.SEMICOLON,
+				expectedLiteral: ";",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "1",
+			},
+			{
+				expectType: TokenType.NOT_EQ,
+				expectedLiteral: "!=",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "2",
+			},
+			{
+				expectType: TokenType.SEMICOLON,
+				expectedLiteral: ";",
+			},
+			{
+				expectType: TokenType.EOF,
+				expectedLiteral: "",
+			},
+		];
+		for (const test of tests) {
+			const token = lexer.nextToken();
+			expect(token.Type).toEqual(test.expectType);
+			expect(token.Literal).toEqual(test.expectedLiteral);
+		}
+	});
 });

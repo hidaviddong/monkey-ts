@@ -4,7 +4,7 @@ export class Lexer {
 	private input: string;
 	private position: number;
 	private readPosition: number;
-	private ch: string;
+	private ch: string; // 读取的是单个字符
 	constructor(input: string) {
 		this.input = input;
 		this.position = 0;
@@ -22,12 +22,26 @@ export class Lexer {
 		this.position = this.readPosition;
 		this.readPosition++;
 	}
+	// 目标是看input中的下一个字符是什么
+	peekChar() {
+		if (this.readPosition >= this.input.length) {
+			this.ch = "0";
+		} else {
+			return this.input[this.readPosition];
+		}
+	}
 	nextToken() {
 		let token: Token = { Type: TokenType.ILLEGAL, Literal: "" };
 		this.skipWhiteSpace();
 		switch (this.ch) {
 			case "=":
-				token = { Type: TokenType.ASSIGN, Literal: this.ch };
+				// 如果'='的下一个字符，还是'='的话
+				if (this.peekChar() === "=") {
+					this.readChar();
+					token = { Type: TokenType.EQ, Literal: "==" };
+				} else {
+					token = { Type: TokenType.ASSIGN, Literal: this.ch };
+				}
 				break;
 			case ";":
 				token = { Type: TokenType.SEMICOLON, Literal: this.ch };
@@ -60,7 +74,14 @@ export class Lexer {
 				token = { Type: TokenType.SLASH, Literal: this.ch };
 				break;
 			case "!":
-				token = { Type: TokenType.BANG, Literal: this.ch };
+				// 如果'!'的下一个字符，还是'='的话 返回!=
+				if (this.peekChar() === "=") {
+					this.readChar();
+					token = { Type: TokenType.NOT_EQ, Literal: "!=" };
+				} else {
+					token = { Type: TokenType.BANG, Literal: this.ch };
+				}
+
 				break;
 			case "<":
 				token = { Type: TokenType.LT, Literal: this.ch };
