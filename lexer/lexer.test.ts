@@ -209,4 +209,62 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
+	test("should parser !-/*<>", () => {
+		const input = `
+		!-/*5
+		5 < 10 > 5
+		`;
+		const lexer = new Lexer(input);
+		const tests = [
+			{
+				expectType: TokenType.BANG,
+				expectedLiteral: "!",
+			},
+			{
+				expectType: TokenType.MINUS,
+				expectedLiteral: "-",
+			},
+			{
+				expectType: TokenType.SLASH,
+				expectedLiteral: "/",
+			},
+			{
+				expectType: TokenType.ASTERISK,
+				expectedLiteral: "*",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "5",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "5",
+			},
+			{
+				expectType: TokenType.LT,
+				expectedLiteral: "<",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "10",
+			},
+			{
+				expectType: TokenType.RT,
+				expectedLiteral: ">",
+			},
+			{
+				expectType: TokenType.INT,
+				expectedLiteral: "5",
+			},
+			{
+				expectType: TokenType.EOF,
+				expectedLiteral: "",
+			},
+		];
+		for (const test of tests) {
+			const token = lexer.nextToken();
+			expect(token.Type).toEqual(test.expectType);
+			expect(token.Literal).toEqual(test.expectedLiteral);
+		}
+	});
 });

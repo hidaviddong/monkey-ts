@@ -9,6 +9,12 @@ export enum TokenType {
 	// 运算符
 	ASSIGN = "=",
 	PLUS = "+",
+	MINUS = "-",
+	BANG = "!",
+	ASTERISK = "*",
+	SLASH = "/",
+	LT = "<",
+	RT = ">",
 
 	// 分隔符
 	COMMA = ",",
@@ -27,6 +33,10 @@ export enum TokenType {
 export const Keywords = new Map<string, TokenType>([
 	["fn", TokenType.FUNCTION],
 	["let", TokenType.LET],
+	// ["true", TokenType.FUNCTION],
+	// ["false", TokenType.FUNCTION],
+	// ["if", TokenType.FUNCTION],
+	// ["else", TokenType.FUNCTION],
 ]);
 
 export interface Token {

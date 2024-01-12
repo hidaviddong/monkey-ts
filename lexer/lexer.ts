@@ -50,6 +50,24 @@ export class Lexer {
 			case ",":
 				token = { Type: TokenType.COMMA, Literal: this.ch };
 				break;
+			case "-":
+				token = { Type: TokenType.MINUS, Literal: this.ch };
+				break;
+			case "*":
+				token = { Type: TokenType.ASTERISK, Literal: this.ch };
+				break;
+			case "/":
+				token = { Type: TokenType.SLASH, Literal: this.ch };
+				break;
+			case "!":
+				token = { Type: TokenType.BANG, Literal: this.ch };
+				break;
+			case "<":
+				token = { Type: TokenType.LT, Literal: this.ch };
+				break;
+			case ">":
+				token = { Type: TokenType.RT, Literal: this.ch };
+				break;
 			case "0":
 				token = { Type: TokenType.EOF, Literal: "" };
 				break;
