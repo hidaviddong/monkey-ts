@@ -2,6 +2,9 @@
   "name": "monkey-ts",
   "module": "index.ts",
   "type": "module",
+  "scripts":{
+    "test":"bun test"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.5.1",
     "@types/bun": "latest"
