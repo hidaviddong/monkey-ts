@@ -271,4 +271,85 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
+	test("should parser more keywords like true false if else return", () => {
+		const input = `
+			if(true){
+				return true;
+			}else{
+				return false;
+			}
+		`;
+		const lexer = new Lexer(input);
+		const tests: TestsType = [
+			{
+				expectType: TokenType.IF,
+				expectedLiteral: "if",
+			},
+			{
+				expectType: TokenType.LPAREN,
+				expectedLiteral: "(",
+			},
+			{
+				expectType: TokenType.TRUE,
+				expectedLiteral: "true",
+			},
+			{
+				expectType: TokenType.RPAREN,
+				expectedLiteral: ")",
+			},
+			{
+				expectType: TokenType.LBRACE,
+				expectedLiteral: "{",
+			},
+			{
+				expectType: TokenType.RETURN,
+				expectedLiteral: "return",
+			},
+			{
+				expectType: TokenType.TRUE,
+				expectedLiteral: "true",
+			},
+			{
+				expectType: TokenType.SEMICOLON,
+				expectedLiteral: ";",
+			},
+			{
+				expectType: TokenType.RBRACE,
+				expectedLiteral: "}",
+			},
+			{
+				expectType: TokenType.ELSE,
+				expectedLiteral: "else",
+			},
+			{
+				expectType: TokenType.LBRACE,
+				expectedLiteral: "{",
+			},
+			{
+				expectType: TokenType.RETURN,
+				expectedLiteral: "return",
+			},
+			{
+				expectType: TokenType.FALSE,
+				expectedLiteral: "false",
+			},
+			{
+				expectType: TokenType.SEMICOLON,
+				expectedLiteral: ";",
+			},
+			{
+				expectType: TokenType.RBRACE,
+				expectedLiteral: "}",
+			},
+			{
+				expectType: TokenType.EOF,
+				expectedLiteral: "",
+			},
+		];
+		for (const test of tests) {
+			const token = lexer.nextToken();
+			expect(token.Type).toEqual(test.expectType);
+			expect(token.Literal).toEqual(test.expectedLiteral);
+		}
+	});
 });

@@ -28,15 +28,21 @@ export enum TokenType {
 	// 关键字
 	FUNCTION = "FUNCTION",
 	LET = "LET",
+	TRUE = "TRUE",
+	FALSE = "FALSE",
+	IF = "IF",
+	ELSE = "ELSE",
+	RETURN = "RETURN",
 }
 
 export const Keywords = new Map<string, TokenType>([
 	["fn", TokenType.FUNCTION],
 	["let", TokenType.LET],
-	// ["true", TokenType.FUNCTION],
-	// ["false", TokenType.FUNCTION],
-	// ["if", TokenType.FUNCTION],
-	// ["else", TokenType.FUNCTION],
+	["true", TokenType.TRUE],
+	["false", TokenType.FALSE],
+	["if", TokenType.IF],
+	["else", TokenType.ELSE],
+	["return", TokenType.RETURN],
 ]);
 
 export interface Token {
