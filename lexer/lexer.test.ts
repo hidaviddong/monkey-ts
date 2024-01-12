@@ -8,7 +8,7 @@ interface ExpectLexerType {
 type TestsType = ExpectLexerType[];
 
 describe("Lexer", () => {
-	test("should parser the basic input correctly", () => {
+	test("should parser the basic operators correctly", () => {
 		const input = "=+(){}";
 		const lexer = new Lexer(input);
 		const tests: TestsType = [
@@ -213,7 +213,7 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
-	test("should parser more operators like !-/*<>", () => {
+	test("should parser operators !-/*<>", () => {
 		const input = `
 		!-/*5
 		5 < 10 > 5
@@ -352,7 +352,7 @@ describe("Lexer", () => {
 			expect(token.Literal).toEqual(test.expectedLiteral);
 		}
 	});
-	test("should support == and !=", () => {
+	test("should parser operators == and !=", () => {
 		const input = `
 		1==1;
 		1!=2;
